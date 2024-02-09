@@ -10,7 +10,7 @@ on:
 
 env:
   
-  AWS_REGION : <"ue-west-1"> #Change to reflect your Region
+  AWS_REGION : <"eu-west-1"> #Change to reflect your Region
 
 # Permission can be added at job level or workflow level    
 permissions:
