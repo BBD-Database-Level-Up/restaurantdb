@@ -1,0 +1,74 @@
+USE master;
+GO
+
+
+
+CREATE DATABASE RestaurantDB;
+GO
+
+
+USE 
+RestaurantDB
+GO
+
+
+CREATE TABLE Person (
+  PK_PersonID INT PRIMARY KEY,
+  FirstName VARCHAR(50) NOT NULL,
+  DateOfBirth DATE NOT NULL,
+  LastName VARCHAR(50) NOT NULL
+);
+GO
+
+
+CREATE TABLE Employee (
+  PK_EmployeeID INT PRIMARY KEY,
+  FK_Person_ID INT FOREIGN KEY REFERENCES Person(PK_PersonID),
+  IDNumber VARCHAR(20) NOT NULL
+);
+GO
+
+
+CREATE TABLE Customer (
+  PK_CustomerID INT PRIMARY KEY,
+  FK_PersonID INT FOREIGN KEY REFERENCES Person(PK_PersonID),
+  JoiningDate DATE NOT NULL
+);
+GO
+
+
+CREATE TABLE OrderRecords (
+  PK_OrderID INT PRIMARY KEY,
+  FK_EmployeeID INT FOREIGN KEY REFERENCES Employee(PK_EmployeeID),
+  FK_CustomerID INT FOREIGN KEY REFERENCES Customer(PK_CustomerID),
+  SaleDateTime DATE NOT NULL,
+  TipAdded DECIMAL(10,2) NOT NULL
+);
+GO
+
+
+CREATE TABLE MenuItem (
+  PK_Menu_Item_ID INT PRIMARY KEY,
+  Price DECIMAL(10,2) NOT NULL,
+  ItemDescription VARCHAR(100) NOT NULL
+);
+GO
+
+
+CREATE TABLE MenuItemOrdered (
+  FK_Menu_Item_ID INT FOREIGN KEY REFERENCES Menu_Item(PK_Menu_Item_ID),
+  FK_OrderID INT FOREIGN KEY REFERENCES OrderRecords(PK_OrderID),
+  Quantity INT NOT NULL,
+  CONSTRAINT PK_Menu_Items_Ordered PRIMARY KEY (FK_Menu_Item_ID, FK_OrderID)
+);
+GO
+
+
+CREATE TABLE Rating (
+  PK_RatingID INT PRIMARY KEY,
+  FK_CustomerID INT FOREIGN KEY REFERENCES Customer(PK_CustomerID),
+  FK_Menu_Item_ID INT FOREIGN KEY REFERENCES Menu_Item(PK_Menu_Item_ID),
+  Stars INT NOT NULL CHECK (Stars BETWEEN 1 AND 5),
+  Comment VARCHAR(200) NULL
+);
+GO
