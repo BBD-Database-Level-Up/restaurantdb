@@ -2,6 +2,8 @@ USE master;
 GO
 
 
+DROP DATABASE RestaurantDB;
+GO
 
 CREATE DATABASE RestaurantDB;
 GO
@@ -48,26 +50,28 @@ GO
 
 
 CREATE TABLE MenuItem (
-  PK_Menu_Item_ID INT PRIMARY KEY,
+  PK_MenuItem_ID INT PRIMARY KEY,
   Price DECIMAL(10,2) NOT NULL,
   ItemDescription VARCHAR(100) NOT NULL
 );
 GO
 
 
+
 CREATE TABLE MenuItemOrdered (
-  FK_Menu_Item_ID INT FOREIGN KEY REFERENCES Menu_Item(PK_Menu_Item_ID),
-  FK_OrderID INT FOREIGN KEY REFERENCES OrderRecords(PK_OrderID),
+  FK_MenuItem_ID INT,
+  FK_OrderID INT,
   Quantity INT NOT NULL,
-  CONSTRAINT PK_Menu_Items_Ordered PRIMARY KEY (FK_Menu_Item_ID, FK_OrderID)
+  CONSTRAINT FK_MenuItem FOREIGN KEY (FK_MenuItem_ID) REFERENCES MenuItem(PK_MenuItem_ID),
+  CONSTRAINT FK_OrderRecords FOREIGN KEY (FK_OrderID) REFERENCES OrderRecords(PK_OrderID),
+  CONSTRAINT PK_MenuItems_Ordered PRIMARY KEY (FK_MenuItem_ID, FK_OrderID)
 );
 GO
-
 
 CREATE TABLE Rating (
   PK_RatingID INT PRIMARY KEY,
   FK_CustomerID INT FOREIGN KEY REFERENCES Customer(PK_CustomerID),
-  FK_Menu_Item_ID INT FOREIGN KEY REFERENCES Menu_Item(PK_Menu_Item_ID),
+  FK_MenuItem_ID INT FOREIGN KEY REFERENCES MenuItem(PK_MenuItem_ID),
   Stars INT NOT NULL CHECK (Stars BETWEEN 1 AND 5),
   Comment VARCHAR(200) NULL
 );
