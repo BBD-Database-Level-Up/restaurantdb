@@ -31,6 +31,3 @@ RETURN
         o.FK_CustomerID = @CustomerID
 );
 GO
-
-SELECT *
-FROM GetCustomerOrders(@CustomerID);
