@@ -14,16 +14,20 @@ jobs:
       # if we want a specific version        with: terraform_version: "1.1.7"
       - name: Terraform Init
         id: init
+        working-directory: terraform
         run: terraform init
 
       - name: Terraform Validate
         id: validate
+        working-directory: terraform
         run: terraform validate
 
       - name: Terraform Plan
         id: plan
+        working-directory: terraform
         run: terraform plan -no-color
 
       - name: Terraform Apply
         id: apply
+        working-directory: terraform
         run: terraform apply -auto-approve
