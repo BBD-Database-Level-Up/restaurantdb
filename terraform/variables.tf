@@ -1,23 +1,23 @@
 variable "aws_region" {
-  type    = string
+  type = string
 }
 
 variable "username" {
-  type    = string
+  type = string
 }
 
 variable "password" {
-  type    = string
+  type = string
 }
 
 variable "aws_access_key" {
-  type    = string
+  type = string
 }
 
 variable "aws_secret_key" {
-  type    = string
+  type = string
 }
 
 variable "ingress_port" {
-  type    = number
+  type = number
 }
