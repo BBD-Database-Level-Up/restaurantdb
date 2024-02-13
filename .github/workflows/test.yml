@@ -20,7 +20,7 @@ jobs:
       - name: Terraform Validate
         id: validate
         working-directory: terraform
-        run: terraform pan
+        run: terraform validate
 
       - name: Terraform Plan
         id: plan
