@@ -1,0 +1,8 @@
+# This is an example of the tfvars that you could make for a local environment.
+# This file acts like .env file so environment variables could be used instead.
+aws_region = "example_region"
+username = "example_username"
+password = "example_password"
+aws_access_key = "example_access_key"
+aws_secret_key = "example_secret_key"
+ingress_port = 1234
