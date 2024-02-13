@@ -1,0 +1,10 @@
+*.env
+# Terraform files to ignore
+.terraform
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.*
+*.tfvars
+**/.terraform/*
+# Unsure if the terraform lock should be excluded, commenting it for now 
+# *.lock.hcl
