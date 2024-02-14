@@ -8,6 +8,7 @@ locations = [ "filesystem:migrations" ]
 mixed = true
 outOfOrder = true
 validateMigrationNaming = true
+cleanDisabled = false
 
   [flyway.check]
   majorTolerance = 0
