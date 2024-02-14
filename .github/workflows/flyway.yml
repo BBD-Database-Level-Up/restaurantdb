@@ -1,0 +1,31 @@
+name: testing terraform
+on:
+  push:
+    branches: [ feature/flyway ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flyway
+    env:
+      FLYWAY_USER: ${{secrets.USERNAME}}
+      FLYWAY_PASSWORD: ${{secrets.PASSWORD}}
+      # Make sure that we get this from the aws
+      FLYWAY_URL: ${{secrets.DB_URL}}
+      # FLYWAY_SCHEMAS=
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
+      - name: Setup Flyway CLI
+        run: |
+          sudo apt update
+          sudo apt install -y default-jre
+          wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.0.2/flyway-commandline-8.0.2-linux-x64.tar.gz | tar xvz
+          sudo ln -s $(pwd)/flyway-8.0.2/flyway /usr/local/bin/flyway
+      
+      - name: Test Flyway CLI
+        run: flyway baseline
