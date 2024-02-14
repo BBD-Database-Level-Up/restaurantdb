@@ -17,7 +17,7 @@ jobs:
       FLYWAY_CLEAN_DISABLED: false
       FLYWAY_LOCATIONS: "filesystem:./restaurantdb_new/"
       flyway_environment: "restaurant-db-new"
-      FLYWAY_CONFIG_FILES: "./flyway/restaurantdb_new/flyway.toml"
+      FLYWAY_CONFIG_FILES: "filesystem:./restaurantdb_new/flyway.toml"
     
     steps:
       - name: Checkout code
@@ -30,9 +30,6 @@ jobs:
           sudo apt install -y default-jre
           wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.7.2/flyway-commandline-10.7.2-linux-x64.tar.gz | tar xvz
           sudo ln -s $(pwd)/flyway-10.7.2/flyway /usr/local/bin/flyway
-
-      - name: Test Flyway CLI
-        run: flyway clean
 
       - name: Test Flyway CLI
         run: flyway baseline
