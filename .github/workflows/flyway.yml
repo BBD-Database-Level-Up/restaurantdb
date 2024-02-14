@@ -1,4 +1,4 @@
-name: testing terraform
+name: testing flyway
 on:
   push:
     branches: [ feature/flyway ]
@@ -29,3 +29,6 @@ jobs:
       
       - name: Test Flyway CLI
         run: flyway baseline
+
+      - name: Test Flyway CLI 2
+        run: flyway migrate
