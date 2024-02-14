@@ -15,7 +15,7 @@ jobs:
       FLYWAY_URL: ${{secrets.DB_URL}}
       # FLYWAY_SCHEMAS=
       FLYWAY_LOCATIONS: "./flyway/restaurantdb_new/"
-    
+      flyway_environment: "restaurant-db-new"
     
     steps:
       - name: Checkout code
