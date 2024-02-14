@@ -30,6 +30,9 @@ jobs:
           sudo ln -s $(pwd)/flyway-10.7.2/flyway /usr/local/bin/flyway
 
       - name: Test Flyway CLI
+        run: flyway clean
+
+      - name: Test Flyway CLI
         run: flyway baseline
 
       - name: Test Flyway Migrate 
