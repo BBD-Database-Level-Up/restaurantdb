@@ -5,8 +5,8 @@ This guide will walk you through the process of setting up a relational database
 ## Requirements
 
 - AWS Account
-- Terraform installed on your local machine
-- Flyway installed on your local machine
+- Terraform [installed](https://developer.hashicorp.com/terraform/install) on your local machine
+- Flyway [installed](https://documentation.red-gate.com/fd/#download-and-installation) on your local machine
 - Basic knowledge of AWS services, Terraform, and Flyway
 - Access to the provided Entity-Relationship Diagram (ERD) diagram for reference
   ![restaurant database model](/restuarant.drawio.png)
