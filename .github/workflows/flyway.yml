@@ -17,6 +17,7 @@ jobs:
       FLYWAY_CLEAN_DISABLED: false
       FLYWAY_LOCATIONS: "./flyway/restaurantdb_new/"
       flyway_environment: "restaurant-db-new"
+      FLYWAY_CONFIG_FILES: "./flyway/restaurantdb_new/flyway.toml"
     
     steps:
       - name: Checkout code
