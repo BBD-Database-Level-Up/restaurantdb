@@ -14,7 +14,7 @@ jobs:
       # Make sure that we get this from the aws
       FLYWAY_URL: ${{secrets.DB_URL}}
       # FLYWAY_SCHEMAS=
-      # FLYWAY_LOCATIONS: "filesystem:./flyway/restaurantdb_new/"
+      FLYWAY_LOCATIONS: "./flyway/restaurantdb_new/"
     
     
     steps:
