@@ -1,0 +1,5 @@
+[environments.restaurant-db-new]
+user = "ryan"
+password = "${localSecret.Flyway Desktop 1421fa9d-7fc1-4a02-a591-69566ca58a7d}"
+url = "jdbc:sqlserver://restaurant-db.chulcebul0ir.eu-west-1.rds.amazonaws.com:1433;databaseName=RestaurantDB;encrypt=false;trustServerCertificate=true"
+displayName = "restaurant-db-new"
