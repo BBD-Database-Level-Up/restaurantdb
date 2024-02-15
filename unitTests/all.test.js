@@ -8,7 +8,6 @@ const functionPaths = ['../schema-model/Functions/scalar-function.sql', '../sche
 const config = {
     user: USERNAME,
     password: PASSWORD,
-    database: 'RestaurantDB',
     server: "127.0.0.1",
     options: {
         enableArithAbort: true,
@@ -21,6 +20,7 @@ const config = {
 beforeAll(async () => {
     try {
         await sql.connect(config);
+        await sql.query(`CREATE DATABASE RestuarantDB`);
         const script = fs.readFileSync(schemaPath, 'utf8');
         await sql.query(script);
         functionPaths.forEach(await sql.query);
