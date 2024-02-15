@@ -1,0 +1,38 @@
+name: flyway
+on:
+  push:
+    branches: [ feature/flyway ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flyway
+    env:
+      FLYWAY_USER: ${{secrets.USERNAME}}
+      FLYWAY_PASSWORD: ${{secrets.PASSWORD}}
+      # Make sure that we get this from the aws
+      FLYWAY_URL: ${{secrets.DB_URL}}
+      # FLYWAY_SCHEMAS=
+      FLYWAY_CLEAN_DISABLED: false
+      FLYWAY_LOCATIONS: "filesystem:./restaurantdb_new/"
+      flyway_environment: "restaurant-db-new"
+      FLYWAY_CONFIG_FILES: "filesystem:./restaurantdb_new/flyway.toml"
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
+      - name: Setup Flyway CLI
+        run: |
+          sudo apt update
+          sudo apt install -y default-jre
+          wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/10.7.2/flyway-commandline-10.7.2-linux-x64.tar.gz | tar xvz
+          sudo ln -s $(pwd)/flyway-10.7.2/flyway /usr/local/bin/flyway
+
+      - name: Flyway Baseline
+        run: flyway baseline
+
+      - name: Flyway Migrate 
+        run: flyway migrate 
