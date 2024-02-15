@@ -1,7 +1,7 @@
 name: testing terraform
 on:
   push:
-    branches: [ feature/terraform ]
+    branches: [ main ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-      # if we want a specific version        with: terraform_version: "1.1.7"
+
       - name: Terraform Init
         id: init
         run: terraform init
