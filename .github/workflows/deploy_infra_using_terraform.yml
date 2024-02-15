@@ -1,4 +1,4 @@
-name: testing terraform
+name: terraform deployment
 on:
   push:
     branches: [ main ]
