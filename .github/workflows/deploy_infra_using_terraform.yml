@@ -27,6 +27,10 @@ jobs:
         id: init
         run: terraform init
 
+      - name: Terraform sync
+        id: sync
+        run: terraform import aws_db_instance.restaurant_rds restaurant-db
+        
       - name: Terraform Validate
         id: validate
         run: terraform validate
