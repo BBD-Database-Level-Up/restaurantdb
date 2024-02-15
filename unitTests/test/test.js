@@ -8,7 +8,7 @@ const config = {
     user: USERNAME,
     password: PASSWORD,
     server: 'sql-server',
-    database: 'RestaurantDB-test',
+    database: 'RestaurantDB',
 
 };
 
