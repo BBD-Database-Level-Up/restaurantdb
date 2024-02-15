@@ -48,6 +48,7 @@ resource "aws_db_instance" "restaurant_rds" {
   password             = var.password
   parameter_group_name = "default.sqlserver-ex-14.0"
   publicly_accessible  = true
+  skip_final_snapshot    = true
 
   tags = {
     created-using = "terraform"
