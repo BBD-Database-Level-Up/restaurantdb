@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = var.aws_region  
+  region     = var.aws_region
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
 }
@@ -38,16 +38,16 @@ resource "aws_security_group" "mssql_security_access" {
 
 
 resource "aws_db_instance" "restaurant_rds" {
-  allocated_storage    = 20  
-  storage_type         = "gp2"  
-  engine               = "sqlserver-ex"  
-  engine_version       = "14.00.3381.3.v1"  
-  instance_class       = "db.t2.micro"  
-  identifier           = "restaurant-db-dev"
-  username             = var.username  
-  password             = var.password  
-  parameter_group_name = "default.sqlserver-ex-14.0"  
-  publicly_accessible  = true  
+  allocated_storage    = 20
+  storage_type         = "gp2"
+  engine               = "sqlserver-ex"
+  engine_version       = "14.00.3381.3.v1"
+  instance_class       = "db.t2.micro"
+  identifier           = "restaurant-db"
+  username             = var.username
+  password             = var.password
+  parameter_group_name = "default.sqlserver-ex-14.0"
+  publicly_accessible  = true
 
   tags = {
     created-using = "terraform"
