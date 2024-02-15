@@ -1,6 +1,6 @@
 const sql = require('mssql');
 const fs = require('fs');
-const USERNAME = 'mssql';
+const USERNAME = 'sa';
 const PASSWORD = 'Test12345@';
 const schemaPath = '../schema-model/Tables/schema.sql';
 const functionPaths = ['../schema-model/Functions/scalar-function.sql', '../schema-model/Functions/table-valued-function.sql']
@@ -9,7 +9,7 @@ const config = {
     user: USERNAME,
     password: PASSWORD,
     database: 'RestaurantDB',
-    server: "0.0.0.0",
+    server: "127.0.0.1",
     options: {
         enableArithAbort: true,
         trustServerCertificate: true,

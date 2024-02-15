@@ -4,20 +4,8 @@ services:
   sql-server:
     image: mcr.microsoft.com/mssql/server:latest
     environment:
-      SA_PASSWORD: "Test12345@"  # Set your SQL Server password here
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: "Test12345@"  # Set your SQL Server password here
       ACCEPT_EULA: "Y"
     ports:
       - '1433:1433'
-
-  node-test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - sql-server
-    environment:
-      SQL_SERVER_HOST: sql-server
-      SQL_SERVER_PORT: 1433
-      SQL_USER: "sa"
-      SQL_PASSWORD: "Test12345@"  # Set your SQL Server password here
-      SQL_DB_NAME: "RestaurantDB"
