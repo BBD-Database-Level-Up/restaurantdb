@@ -1,0 +1,33 @@
+
+name: 'Flyway Github Actions'
+ 
+on:
+  push:
+    branches:
+      - tawanda
+      
+env:
+  SQLFLUFF_DIALECT: postgres
+  DOCKER_IMAGE: redgate/flyway
+  SCHEMAS: public
+
+
+jobs:
+
+  Continuous-Integration-Build:
+    name: Continuous Integration Build
+    runs-on: ubuntu-20.04
+ 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.0
+               
+      - name: Continuous Integration Flyway Clean Migrate
+        run: >-
+          docker run --rm
+          --volume ${{ github.workspace }}/Flyway/migrations:/flyway/sql:ro
+          "${{ env.DOCKER_IMAGE }}"
+          -url="${{ secrets.DB_URL }}"
+          -user="${{ secrets.USERNAME }}"
+          -password="${{ secrets.PASSWORD }}"
+          info migrate

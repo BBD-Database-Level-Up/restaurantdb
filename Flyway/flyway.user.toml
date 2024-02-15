@@ -1,0 +1,3 @@
+[environments.restaurant-db]
+user = "ryan"
+password = "${localSecret.Flyway Desktop ee076866-6720-407d-8e8b-2274a666e93b}"
