@@ -6,18 +6,18 @@ GO
 
 CREATE VIEW EmployeePerformanceMetrics AS
 SELECT
-    E.PK_EmployeeID,
-    E.FK_Person_ID,
+    E.EmployeeID,
+    E.PersonID,
     P.FirstName,
     P.LastName,
-    COUNT(O.PK_OrderID) AS OrdersHandled,
+    COUNT(O.OrderId) AS OrdersHandled,
     SUM(O.TipAdded) AS TotalTips,
     AVG(O.TipAdded) AS AvgTips
 FROM
     Employee E
 JOIN
-    OrderRecords O ON E.PK_EmployeeID = O.FK_EmployeeID
+    OrderRecord O ON E.EmployeeID = O.EmployeeID
 JOIN
-    Person P ON E.FK_Person_ID = P.PK_PersonID
+    Person P ON E.PersonID = P.PersonID
 GROUP BY
-    E.PK_EmployeeID, E.FK_Person_ID, P.FirstName, P.LastName;
+    E.EmployeeID, E.PersonID, P.FirstName, P.LastName;

@@ -9,7 +9,7 @@ BEGIN
 
     SELECT @AverageRating = AVG(CAST(Stars AS DECIMAL(3, 2)))
     FROM Rating
-    WHERE FK_MenuItem_ID = @MenuItemID;
+    WHERE MenuItemID = @MenuItemID;
 
     RETURN @AverageRating;
 END;

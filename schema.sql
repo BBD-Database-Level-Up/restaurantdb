@@ -14,65 +14,122 @@ RestaurantDB
 GO
 
 
-CREATE TABLE Person (
-  PK_PersonID INT PRIMARY KEY,
-  FirstName VARCHAR(50) NOT NULL,
-  DateOfBirth DATE NOT NULL,
-  LastName VARCHAR(50) NOT NULL
+-- Create Person table
+CREATE TABLE Person
+(
+    PersonID    INT         NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    FirstName   VARCHAR(50) NOT NULL,
+    LastName    VARCHAR(50) NOT NULL,
+    DateOfBirth DATE        NOT NULL,
 );
 GO
 
-
-CREATE TABLE Employee (
-  PK_EmployeeID INT PRIMARY KEY,
-  FK_Person_ID INT FOREIGN KEY REFERENCES Person(PK_PersonID),
-  IDNumber VARCHAR(20) NOT NULL
+-- Create Employee table
+CREATE TABLE Employee
+(
+    EmployeeID INT         NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    PersonID   INT         NOT NULL,
+    IDNumber   VARCHAR(13) NOT NULL
 );
+
 GO
 
-
-CREATE TABLE Customer (
-  PK_CustomerID INT PRIMARY KEY,
-  FK_PersonID INT FOREIGN KEY REFERENCES Person(PK_PersonID),
-  JoiningDate DATE NOT NULL
+-- Create Customer table
+CREATE TABLE Customer
+(
+    CustomerID  INT  NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    PersonID    INT  NOT NULL,
+    JoiningDate DATE NOT NULL
 );
+
 GO
 
-
-CREATE TABLE OrderRecords (
-  PK_OrderID INT PRIMARY KEY,
-  FK_EmployeeID INT FOREIGN KEY REFERENCES Employee(PK_EmployeeID),
-  FK_CustomerID INT FOREIGN KEY REFERENCES Customer(PK_CustomerID),
-  SaleDateTime DATE NOT NULL,
-  TipAdded DECIMAL(10,2) NOT NULL
+-- Create OrderRecord table
+CREATE TABLE OrderRecord
+(
+    OrderId      INT            NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    EmployeeID   INT            NOT NULL,
+    CustomerID   INT            NOT NULL,
+    SaleDateTime DATE           NOT NULL,
+    TipAdded     DECIMAL(10, 2) NOT NULL CHECK (TipAdded >= 0)
 );
+
 GO
 
-
-CREATE TABLE MenuItem (
-  PK_MenuItem_ID INT PRIMARY KEY,
-  Price DECIMAL(10,2) NOT NULL,
-  ItemDescription VARCHAR(100) NOT NULL
+-- Create MenuItem table
+CREATE TABLE MenuItem
+(
+    MenuItemId      INT            NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    Price           DECIMAL(10, 2) NOT NULL,
+    ItemDescription VARCHAR(100)   NOT NULL
 );
+
 GO
 
-
-
-CREATE TABLE MenuItemOrdered (
-  FK_MenuItem_ID INT,
-  FK_OrderID INT,
-  Quantity INT NOT NULL,
-  CONSTRAINT FK_MenuItem FOREIGN KEY (FK_MenuItem_ID) REFERENCES MenuItem(PK_MenuItem_ID),
-  CONSTRAINT FK_OrderRecords FOREIGN KEY (FK_OrderID) REFERENCES OrderRecords(PK_OrderID),
-  CONSTRAINT PK_MenuItems_Ordered PRIMARY KEY (FK_MenuItem_ID, FK_OrderID)
+-- Create MenuItemsOrdered table
+CREATE TABLE MenuItemsOrdered
+(
+    MenuItemsOrderedID INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    MenuItemID         INT NOT NULL,
+    OrderID            INT NOT NULL,
+    Quantity           INT NOT NULL,
 );
+
 GO
 
-CREATE TABLE Rating (
-  PK_RatingID INT PRIMARY KEY,
-  FK_CustomerID INT FOREIGN KEY REFERENCES Customer(PK_CustomerID),
-  FK_MenuItem_ID INT FOREIGN KEY REFERENCES MenuItem(PK_MenuItem_ID),
-  Stars INT NOT NULL CHECK (Stars BETWEEN 1 AND 5),
-  Comment VARCHAR(200) NULL
+-- Create Rating table
+CREATE TABLE Rating
+(
+    RatingId   INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    CustomerID INT NOT NULL,
+    MenuItemID INT NOT NULL,
+    Stars      INT NOT NULL CHECK (Stars BETWEEN 1 AND 5),
+    Comment    VARCHAR(200)
 );
+
+GO
+
+-- Altering the Customer table to add a foreign key constraint referencing the Person table
+ALTER TABLE Customer
+    ADD CONSTRAINT FK_Customer_Person
+        FOREIGN KEY (PersonId) REFERENCES Person (PersonId);
+GO
+
+-- Altering the Employee table to add foreign key constraint referencing the Person table
+ALTER TABLE Employee
+    ADD CONSTRAINT FK_Employee_Person
+        FOREIGN KEY (PersonId) REFERENCES Person (PersonId);
+GO
+
+-- Altering the MenuItemsOrdered table to add foreign key constraints referencing the MenuItem and ResOrder tables
+ALTER TABLE MenuItemsOrdered
+    ADD CONSTRAINT FK_MenuItemsOrdered_MenuItem
+        FOREIGN KEY (MenuItemId) REFERENCES MenuItem (MenuItemId);
+GO
+
+ALTER TABLE MenuItemsOrdered
+    ADD CONSTRAINT FK_MenuItemsOrdered_ResOrder
+        FOREIGN KEY (OrderId) REFERENCES OrderRecord (OrderId);
+GO
+
+-- Altering the ResOrder table to add foreign key constraints referencing the Employee and Customer tables
+ALTER TABLE OrderRecord
+    ADD CONSTRAINT FK_ResOrder_Employee
+        FOREIGN KEY (EmployeeID) REFERENCES Employee (EmployeeId);
+GO
+
+ALTER TABLE OrderRecord
+    ADD CONSTRAINT FK_ResOrder_Customer
+        FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId);
+GO
+
+-- Altering the Rating table to add foreign key constraints referencing the Customer and MenuItem tables
+ALTER TABLE Rating
+    ADD CONSTRAINT FK_Rating_Customer
+        FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId);
+GO
+
+ALTER TABLE Rating
+    ADD CONSTRAINT FK_Rating_MenuItem
+        FOREIGN KEY (MenuItemId) REFERENCES MenuItem (MenuItemId);
 GO

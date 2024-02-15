@@ -16,18 +16,18 @@ AS
 RETURN
 (
     SELECT
-        o.PK_OrderID AS OrderID,
+        o.OrderID AS OrderID,
         o.SaleDateTime AS OrderDateTime,
         o.TipAdded AS TipAmount,
         m.ItemDescription AS MenuItemDescription,
         mo.Quantity AS QuantityOrdered
     FROM
-        OrderRecords o
+        OrderRecord o
     INNER JOIN
-        MenuItemOrdered mo ON o.PK_OrderID = mo.FK_OrderID
+        MenuItemsOrdered mo ON o.OrderID = mo.OrderID
     INNER JOIN
-        MenuItem m ON mo.FK_MenuItem_ID = m.PK_MenuItem_ID
+        MenuItem m ON mo.MenuItemID = m.MenuItemID
     WHERE
-        o.FK_CustomerID = @CustomerID
+        o.CustomerID = @CustomerID
 );
 GO
