@@ -6,5 +6,6 @@
 *.tfstate.lock.*
 *.tfvars
 **/.terraform/*
+node_modules/
 # Unsure if the terraform lock should be excluded, commenting it for now 
 # *.lock.hcl
