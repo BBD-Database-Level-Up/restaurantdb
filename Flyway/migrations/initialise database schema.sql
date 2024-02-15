@@ -4,7 +4,7 @@ GO
 CREATE DATABASE RestaurantDB;
 GO
 
-
+    
 USE 
 RestaurantDB
 GO
