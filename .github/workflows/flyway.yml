@@ -1,7 +1,7 @@
 name: flyway
 on:
   push:
-    branches: [ feature/flyway ]
+    branches: [ main ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
