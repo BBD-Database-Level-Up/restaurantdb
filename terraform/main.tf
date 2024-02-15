@@ -44,7 +44,6 @@ resource "aws_db_instance" "restaurant_rds" {
   engine_version       = "14.00.3381.3.v1"
   instance_class       = "db.t2.micro"
   identifier           = "restaurant-db"
-  db_name              = "restaurant-db"
   username             = var.username
   password             = var.password
   parameter_group_name = "default.sqlserver-ex-14.0"
